@@ -1,73 +1,97 @@
-# Welcome to your Lovable project
+# GDG VITM Recruitment Portal
 
-## Project info
+A modern, interactive recruitment portal built with cutting-edge web technologies to streamline the GDG VITM recruitment process.
 
-**URL**: https://lovable.dev/projects/1af41a7f-4504-4b4e-86e0-89977cdb96e6
+## 🚀 Features
 
-## How can I edit this code?
+- **Interactive 3D Elements**: Built with Three.js and React Three Fiber
+- **Modern UI**: Built with shadcn/ui and Tailwind CSS
+- **Type Safety**: Full TypeScript support
+- **Fast Development**: Powered by Vite
+- **Form Handling**: Robust form management with React Hook Form
+- **State Management**: Efficient state management with React Query
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+- **Frontend**: React 18
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **3D Rendering**: Three.js, @react-three/fiber, @react-three/drei
+- **Form Handling**: React Hook Form with Zod validation
+- **State Management**: React Query
+- **Build Tool**: Vite
+- **Type Safety**: TypeScript
+- **Animation**: Framer Motion
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1af41a7f-4504-4b4e-86e0-89977cdb96e6) and start prompting.
+## 🚀 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 16+ (Recommended: Latest LTS version)
+- npm or yarn
+- Git
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/GDGVITM/GDG_Recruit_new.git
+   cd GDG_Recruit_new
+   ```
 
-Follow these steps:
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Start the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. **Open your browser**
+   The application will be available at [http://localhost:5173](http://localhost:5173)
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 📦 Build for Production
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm run build
+# or
+yarn build
 ```
 
-**Edit a file directly in GitHub**
+This will create a `dist` folder with the production build.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧪 Testing
 
-**Use GitHub Codespaces**
+To run tests:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+npm test
+# or
+yarn test
+```
 
-## What technologies are used for this project?
+## 🤝 Contributing
 
-This project is built with:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
 
-## How can I deploy this project?
+## 🙏 Acknowledgments
 
-Simply open [Lovable](https://lovable.dev/projects/1af41a7f-4504-4b4e-86e0-89977cdb96e6) and click on Share -> Publish.
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Three.js](https://threejs.org/)
 
-## Can I connect a custom domain to my Lovable project?
+## 📧 Contact
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+For any queries, please contact [Your Email] or open an issue in the repository.
