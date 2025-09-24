@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GDG Recruitment Design System - Google-inspired colors and futuristic effects */
+
+@layer base {
+  :root {
+    --background: 220 15% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 15% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 15% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 217 91% 60%;
+
+    /* Google Brand Colors */
+    --google-blue: 217 91% 60%;
+    --google-red: 4 90% 58%;
+    --google-yellow: 43 96% 56%;
+    --google-green: 142 69% 49%;
+
+    /* Futuristic Effects */
+    --glow-blue: 217 91% 60%;
+    --glow-red: 4 90% 58%;
+    --scan-line: 4 90% 58%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60% / 0.3), hsl(4 90% 58% / 0.3));
+    --gradient-card: linear-gradient(145deg, hsl(220 15% 12%), hsl(220 15% 18%));
+    --gradient-scan: linear-gradient(90deg, transparent, hsl(4 90% 58% / 0.8), transparent);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
+    --shadow-scan: 0 0 20px hsl(4 90% 58% / 0.5);
+    --shadow-card: 0 8px 32px hsl(220 15% 5% / 0.8);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* GDG Futuristic Animation Classes */
+@layer components {
+  .fade-in {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .fade-in-subtitle {
+    animation: fadeInSubtle 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .explore-btn {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    color: hsl(var(--foreground));
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-glow);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    animation: fadeInButton 1s ease-out forwards;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .explore-btn:hover {
+    background: hsl(var(--primary) / 0.1);
+    border-color: hsl(var(--primary));
+    box-shadow: var(--shadow-glow), 0 0 20px hsl(var(--primary) / 0.3);
+    transform: translateX(-50%) translateY(-2px);
+  }
+
+  .explore-arrow {
+    transition: var(--transition-smooth);
+  }
+
+  .explore-btn:hover .explore-arrow {
+    transform: translateY(2px);
+  }
+
+  .gdg-glow {
+    box-shadow: 0 0 20px hsl(var(--google-blue) / 0.5);
+    transition: var(--transition-glow);
+  }
+
+  .gdg-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--google-blue) / 0.7);
+  }
+
+  .scan-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scan-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-scan);
+    animation: scanLine 3s linear infinite;
+    z-index: 1;
+  }
+
+  .timer-digit {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .timer-digit:hover {
+    border-color: hsl(var(--google-red));
+    box-shadow: var(--shadow-card), 0 0 15px hsl(var(--google-red) / 0.3);
+  }
+}
+
+@layer utilities {
+  .text-google-blue { color: hsl(var(--google-blue)); }
+  .text-google-red { color: hsl(var(--google-red)); }
+  .text-google-yellow { color: hsl(var(--google-yellow)); }
+  .text-google-green { color: hsl(var(--google-green)); }
+  
+  .bg-google-blue { background-color: hsl(var(--google-blue)); }
+  .bg-google-red { background-color: hsl(var(--google-red)); }
+  .bg-google-yellow { background-color: hsl(var(--google-yellow)); }
+  .bg-google-green { background-color: hsl(var(--google-green)); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSubtle {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInButton {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--google-blue) / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--google-blue) / 0.8);
+  }
+}
