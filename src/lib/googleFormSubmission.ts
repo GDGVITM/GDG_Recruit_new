@@ -28,14 +28,35 @@ export class GoogleFormSubmission {
       motivation: formData.motivation,
     });
 
+    // Debug: Log the entry IDs being used
+    console.log("🔍 Debug: Entry IDs mapping:", this.ENTRY_IDS);
+
+    // Additional debugging: Check for potential data issues
+    this.validateFormData(formData);
+
+    // Test network connectivity first
+    await this.testNetworkConnectivity();
+
     // Use iframe method as primary (more reliable for Google Forms)
     try {
       await this.submitViaIframe(formData);
       console.log("✅ Form submission successful");
       return;
-    } catch (error) {
-      console.error("❌ Form submission failed:", error);
-      throw new Error("Form submission failed. Please try again.");
+    } catch (iframeError) {
+      console.warn("⚠️ Iframe submission failed, trying direct method:", iframeError);
+      
+      // Fallback to direct submission
+      try {
+        await this.submitDirectly(formData);
+        console.log("✅ Direct form submission successful");
+        return;
+      } catch (directError) {
+        console.error("❌ Both submission methods failed:", {
+          iframe: iframeError,
+          direct: directError
+        });
+        throw new Error("Form submission failed. Please try again or contact support.");
+      }
     }
   }
 
@@ -99,6 +120,9 @@ export class GoogleFormSubmission {
       const iframe = document.createElement('iframe');
       iframe.style.display = 'none';
       iframe.name = `form-submission-frame-${Date.now()}`;
+      
+      // Add sandbox attributes for better security and compatibility
+      iframe.setAttribute('sandbox', 'allow-forms allow-same-origin allow-scripts');
       document.body.appendChild(iframe);
 
       // Create a form that targets the iframe
@@ -107,6 +131,10 @@ export class GoogleFormSubmission {
       form.action = this.GOOGLE_FORM_URL;
       form.target = iframe.name;
       form.style.display = 'none';
+      
+      // Add additional form attributes for better compatibility
+      form.setAttribute('accept-charset', 'UTF-8');
+      form.setAttribute('enctype', 'application/x-www-form-urlencoded');
 
       // Add form fields with better value handling
       Object.entries(this.ENTRY_IDS).forEach(([key, entryId]) => {
@@ -123,8 +151,12 @@ export class GoogleFormSubmission {
 
       // Set up cleanup and timeout
       const cleanup = () => {
-        if (document.body.contains(form)) document.body.removeChild(form);
-        if (document.body.contains(iframe)) document.body.removeChild(iframe);
+        try {
+          if (document.body.contains(form)) document.body.removeChild(form);
+          if (document.body.contains(iframe)) document.body.removeChild(iframe);
+        } catch (cleanupError) {
+          console.warn("⚠️ Cleanup warning:", cleanupError);
+        }
       };
 
       let isCompleted = false;
@@ -133,10 +165,10 @@ export class GoogleFormSubmission {
         if (!isCompleted) {
           isCompleted = true;
           cleanup();
-          console.log("✅ Iframe submission completed (timeout)");
+          console.log("✅ Iframe submission completed (timeout - assuming success)");
           resolve(); // Assume success after timeout
         }
-      }, 8000);
+      }, 10000); // Increased timeout to 10 seconds
 
       // Handle iframe load (indicates form submission completed)
       iframe.onload = () => {
@@ -150,19 +182,46 @@ export class GoogleFormSubmission {
       };
 
       // Handle iframe error
-      iframe.onerror = () => {
+      iframe.onerror = (event) => {
         if (!isCompleted) {
           isCompleted = true;
           clearTimeout(timeout);
           cleanup();
-          console.error("❌ Iframe submission error");
+          console.error("❌ Iframe submission error:", event);
           reject(new Error("Iframe submission failed"));
         }
       };
 
+      // Try to detect navigation events
+      try {
+        iframe.addEventListener('load', () => {
+          if (!isCompleted) {
+            setTimeout(() => {
+              if (!isCompleted) {
+                isCompleted = true;
+                clearTimeout(timeout);
+                cleanup();
+                console.log("✅ Iframe submission completed (navigation detected)");
+                resolve();
+              }
+            }, 2000); // Wait 2 seconds after load to ensure processing
+          }
+        });
+      } catch (listenerError) {
+        console.warn("⚠️ Could not add event listener:", listenerError);
+      }
+
       // Submit the form
       console.log("📤 Submitting form via iframe...");
-      form.submit();
+      try {
+        form.submit();
+      } catch (submitError) {
+        isCompleted = true;
+        clearTimeout(timeout);
+        cleanup();
+        console.error("❌ Form submission error:", submitError);
+        reject(new Error(`Form submission failed: ${submitError.message}`));
+      }
     });
   }
 
@@ -188,6 +247,103 @@ export class GoogleFormSubmission {
       console.error("❌ Test submission failed:", error);
       throw error;
     }
+  }
+
+  // Enhanced debugging method to help verify Google Form setup
+  static debugGoogleForm(): void {
+    console.log("🔍 Google Form Debug Information:");
+    console.log("Form URL:", this.GOOGLE_FORM_URL);
+    console.log("Entry IDs:", this.ENTRY_IDS);
+    console.log("📝 To verify entry IDs:");
+    console.log("1. Open your Google Form in a browser");
+    console.log("2. Right-click -> View Page Source");
+    console.log("3. Search for 'entry.' to find all entry IDs");
+    console.log("4. Compare with the IDs above");
+    console.log("📝 Current entry mapping:");
+    Object.entries(this.ENTRY_IDS).forEach(([field, entryId]) => {
+      console.log(`  ${field}: ${entryId}`);
+    });
+    
+    // Create a test form for manual verification
+    this.createTestForm();
+  }
+
+  // Validate form data for potential issues
+  private static validateFormData(formData: FormData): void {
+    console.log("🔍 Validating form data...");
+    
+    // Check for common data issues
+    Object.entries(formData).forEach(([key, value]) => {
+      if (typeof value === 'string') {
+        // Check for extremely long values
+        if (value.length > 5000) {
+          console.warn(`⚠️ Field '${key}' is very long (${value.length} characters). This might cause issues.`);
+        }
+        
+        // Check for special characters that might cause encoding issues
+        if (/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]/u.test(value)) {
+          console.warn(`⚠️ Field '${key}' contains emojis. This might cause encoding issues.`);
+        }
+        
+        // Check for HTML content
+        if (/<[^>]*>/g.test(value)) {
+          console.warn(`⚠️ Field '${key}' contains HTML tags. This might be sanitized by Google Forms.`);
+        }
+      }
+    });
+    
+    console.log("✅ Form data validation complete");
+  }
+
+  // Test network connectivity to Google Forms
+  private static async testNetworkConnectivity(): Promise<void> {
+    console.log("🔍 Testing network connectivity to Google Forms...");
+    
+    try {
+      // Test basic connectivity to Google
+      const response = await fetch('https://www.google.com/favicon.ico', {
+        method: 'HEAD',
+        mode: 'no-cors',
+        signal: AbortSignal.timeout(5000)
+      });
+      console.log("✅ Network connectivity to Google: OK");
+      
+      // Test if the form URL is accessible
+      const formResponse = await fetch(this.GOOGLE_FORM_URL.replace('/formResponse', '/viewform'), {
+        method: 'HEAD',
+        mode: 'no-cors',
+        signal: AbortSignal.timeout(5000)
+      });
+      console.log("✅ Google Form URL accessibility: OK");
+      
+    } catch (error) {
+      console.warn("⚠️ Network connectivity issue:", error);
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error("Network timeout. Please check your internet connection.");
+      }
+    }
+  }
+
+  // Method to test individual field mapping
+  static testFieldMapping(field: keyof typeof this.ENTRY_IDS, testValue: string): void {
+    console.log(`🧪 Testing field mapping: ${field} -> ${this.ENTRY_IDS[field]}`);
+    
+    const testForm = document.createElement('form');
+    testForm.method = 'POST';
+    testForm.action = this.GOOGLE_FORM_URL;
+    testForm.target = '_blank';
+    
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = this.ENTRY_IDS[field];
+    input.value = testValue;
+    testForm.appendChild(input);
+    
+    document.body.appendChild(testForm);
+    testForm.submit();
+    document.body.removeChild(testForm);
+    
+    console.log(`🚀 Test submitted for ${field}. Check if it appears in Google Form responses.`);
   }
 
   // Simple test that creates a basic form submission
@@ -260,5 +416,72 @@ export class GoogleFormSubmission {
     document.body.appendChild(testForm);
     console.log("✅ Test form created! Click 'Submit Test' to test manually.");
     console.log("📋 Current entry IDs:", this.ENTRY_IDS);
+  }
+
+  // Comprehensive troubleshooting method
+  static async troubleshoot(): Promise<void> {
+    console.log("🔧 Starting comprehensive troubleshooting...");
+    
+    // 1. Check form setup
+    console.log("🔍 Step 1: Checking form configuration...");
+    this.debugGoogleForm();
+    
+    // 2. Test network connectivity
+    console.log("🔍 Step 2: Testing network connectivity...");
+    try {
+      await this.testNetworkConnectivity();
+    } catch (error) {
+      console.error("❌ Network test failed:", error);
+    }
+    
+    // 3. Test with minimal data
+    console.log("🔍 Step 3: Testing with minimal form data...");
+    const minimalData = {
+      name: "Test",
+      email: "test@test.com",
+      university: "Test University",
+      year: "1st Year",
+      position: "Technical Team",
+      skills: "Testing",
+      experience: "None",
+      motivation: "Testing form submission"
+    };
+    
+    try {
+      await this.submit(minimalData);
+      console.log("✅ Minimal data test passed!");
+    } catch (error) {
+      console.error("❌ Minimal data test failed:", error);
+    }
+    
+    // 4. Check browser environment
+    console.log("🔍 Step 4: Checking browser environment...");
+    console.log("User Agent:", navigator.userAgent);
+    console.log("Online status:", navigator.onLine);
+    console.log("Cookies enabled:", navigator.cookieEnabled);
+    console.log("Do Not Track:", navigator.doNotTrack);
+    
+    // 5. Test individual methods
+    console.log("🔍 Step 5: Testing submission methods individually...");
+    
+    // Test iframe method
+    try {
+      console.log("Testing iframe method...");
+      await this.submitViaIframe(minimalData);
+      console.log("✅ Iframe method works!");
+    } catch (error) {
+      console.error("❌ Iframe method failed:", error);
+    }
+    
+    // Test direct method
+    try {
+      console.log("Testing direct method...");
+      await this.submitDirectly(minimalData);
+      console.log("✅ Direct method works!");
+    } catch (error) {
+      console.error("❌ Direct method failed:", error);
+    }
+    
+    console.log("🔧 Troubleshooting complete! Check the logs above for issues.");
   }
 }

@@ -22,7 +22,7 @@ export const MobileNavigation = ({
 
   return (
     <div className="md:hidden border-t border-border bg-card/95 backdrop-blur-lg">
-      <div className="px-2 pt-2 pb-3 space-y-1">
+      <div className="px-2 pt-2 pb-3 space-y-1 z-20">
         <a
           href="#home"
           className="block px-3 py-2 text-foreground hover:text-google-blue transition-colors"

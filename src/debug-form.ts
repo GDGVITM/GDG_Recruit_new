@@ -8,6 +8,10 @@ declare global {
   interface Window {
     testFormSubmission: () => Promise<void>;
     debugFormSubmission: (formData: any) => Promise<void>;
+    debugGoogleForm: () => void;
+    testFieldMapping: (field: string, value: string) => void;
+    createGoogleFormTest: () => void;
+    troubleshootForm: () => Promise<void>;
   }
 }
 
@@ -47,8 +51,33 @@ window.debugFormSubmission = async (formData) => {
   }
 };
 
-console.log("🚀 Debug tools loaded!");
-console.log("💡 Run 'testFormSubmission()' in console to test");
-console.log("💡 Run 'debugFormSubmission(yourData)' to debug specific data");
+// Debug Google Form setup
+window.debugGoogleForm = () => {
+  GoogleFormSubmission.debugGoogleForm();
+};
+
+// Test individual field mapping
+window.testFieldMapping = (field: string, value: string) => {
+  GoogleFormSubmission.testFieldMapping(field as any, value);
+};
+
+// Create test form
+window.createGoogleFormTest = () => {
+  GoogleFormSubmission.createTestForm();
+};
+
+// Comprehensive troubleshooting
+window.troubleshootForm = async () => {
+  await GoogleFormSubmission.troubleshoot();
+};
+
+console.log("🚀 Enhanced debug tools loaded!");
+console.log("💡 Available commands:");
+console.log("  • testFormSubmission() - Run a complete test");
+console.log("  • debugFormSubmission(yourData) - Debug specific data");
+console.log("  • debugGoogleForm() - Check Google Form setup");
+console.log("  • testFieldMapping('field', 'value') - Test individual field");
+console.log("  • createGoogleFormTest() - Create visual test form");
+console.log("  • troubleshootForm() - Run comprehensive troubleshooting");
 
 export {};

@@ -81,7 +81,7 @@ export const HeroSection = () => {
     <div className="h-screen relative overflow-hidden bg-background">
       <div className="h-screen uppercase items-center w-full absolute z-50 pointer-events-none px-10 flex justify-center flex-col">
         <div className="google-heading-1 text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
-          <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-foreground">
+          <div className="z-0 flex space-x-2 lg:space-x-6 overflow-hidden text-foreground">
             {titleWords.map((word, index) => (
               <div
                 key={index}
