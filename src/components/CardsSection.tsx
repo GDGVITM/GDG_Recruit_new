@@ -1,124 +1,186 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { 
-  Code, 
-  Smartphone, 
-  Cloud, 
-  Brain, 
-  Users, 
-  Trophy, 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Code,
+  FileText,
+  GitBranch,
+  BookOpen,
+  Video,
   Calendar,
+  Palette,
+  Users,
+  Trophy,
   MapPin,
   ArrowRight,
-  Star
-} from 'lucide-react';
+  Star,
+  Brain,
+  Megaphone,
+  Paintbrush,
+} from "lucide-react";
 
 const opportunities = [
   {
-    id: 1,
-    title: 'Core Team Member',
-    description: 'Lead technical initiatives and organize community events',
-    requirements: ['Leadership experience', 'Strong technical skills', 'Event management'],
-    icon: Users,
-    color: 'text-google-blue',
-    bgColor: 'bg-google-blue/10',
-    spots: '5 positions',
-    commitment: 'High',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'Web Development Track',
-    description: 'Build amazing web applications and lead workshops',
-    requirements: ['React/Angular/Vue', 'Node.js', 'Database knowledge'],
-    icon: Code,
-    color: 'text-google-red',
-    bgColor: 'bg-google-red/10',
-    spots: '10 positions',
-    commitment: 'Medium'
-  },
-  {
     id: 3,
-    title: 'Mobile Development',
-    description: 'Create mobile apps and share your expertise',
-    requirements: ['Flutter/React Native', 'Native development', 'UI/UX basics'],
-    icon: Smartphone,
-    color: 'text-google-yellow',
-    bgColor: 'bg-google-yellow/10',
-    spots: '8 positions',
-    commitment: 'Medium'
-  },
-  {
-    id: 4,
-    title: 'Cloud & DevOps',
-    description: 'Work with Google Cloud Platform and modern DevOps',
-    requirements: ['GCP knowledge', 'Docker/Kubernetes', 'CI/CD pipelines'],
-    icon: Cloud,
-    color: 'text-google-green',
-    bgColor: 'bg-google-green/10',
-    spots: '6 positions',
-    commitment: 'Medium'
-  },
-  {
-    id: 5,
-    title: 'AI/ML Specialist',
-    description: 'Explore machine learning and artificial intelligence',
-    requirements: ['Python/TensorFlow', 'Data science', 'ML algorithms'],
-    icon: Brain,
-    color: 'text-google-blue',
-    bgColor: 'bg-google-blue/10',
-    spots: '7 positions',
-    commitment: 'High'
+    title: "Open-Source Team",
+    description: "Contribute to open-source projects and build community tools",
+    requirements: [
+      "Git proficiency",
+      "Code reading & analysis",
+      "Technical documentation",
+    ],
+    icon: GitBranch,
+    color: "text-google-yellow",
+    bgColor: "bg-google-yellow/10",
+    featured: true,
   },
   {
     id: 6,
-    title: 'Community Manager',
-    description: 'Grow our community and manage social media presence',
-    requirements: ['Social media skills', 'Content creation', 'Communication'],
-    icon: Trophy,
-    color: 'text-google-red',
-    bgColor: 'bg-google-red/10',
-    spots: '4 positions',
-    commitment: 'Medium'
-  }
+    title: "Event Management Team",
+    description: "Organize and coordinate community events and workshops",
+    requirements: ["Event planning", "Team coordination", "Project management"],
+    icon: Calendar,
+    color: "text-google-red",
+    bgColor: "bg-google-red/10",
+    featured: true,
+  },
+  {
+    id: 7,
+    title: "UI/UX Team",
+    description: "Design intuitive user experiences and visual interfaces",
+    requirements: [
+      "Visual design skills",
+      "Wireframing & prototyping",
+      "Design tools proficiency",
+    ],
+    icon: Palette,
+    color: "text-google-green",
+    bgColor: "bg-google-green/10",
+    featured: true,
+  },
+  {
+    id: 8,
+    title: "Events & Outreach",
+    description: "Build community connections and expand our reach",
+    requirements: [
+      "Community engagement",
+      "Partnership development",
+      "Networking & communication",
+    ],
+    icon: Megaphone,
+    color: "text-google-yellow",
+    bgColor: "bg-google-yellow/10",
+  },
+  {
+    id: 1,
+    title: "Technical Team",
+    description: "Lead technical initiatives and build innovative solutions",
+    requirements: ["React/Next.js", "Node.js", "Database knowledge"],
+    icon: Code,
+    color: "text-google-green",
+    bgColor: "bg-google-blue/10",
+    commitment: "High",
+  },
+  {
+    id: 2,
+    title: "Finance Team",
+    description: "Manage budgets and drive strategic financial planning",
+    requirements: [
+      "Leadership experience",
+      "Strong technical skills",
+      "Event management",
+    ],
+    icon: Users,
+    color: "text-google-red",
+    bgColor: "bg-google-red/10",
+  },
+  {
+    id: 4,
+    title: "Documentation Team",
+    description: "Create comprehensive technical documentation and guides",
+    requirements: [
+      "Report writing & structuring",
+      "Formatting expertise",
+      "Microsoft Docs",
+    ],
+    icon: BookOpen,
+    color: "text-google-green",
+    bgColor: "bg-google-green/10",
+  },
+  {
+    id: 5,
+    title: "Media Team",
+    description: "Create engaging content and manage social media presence",
+    requirements: [
+      "Video editing tools",
+      "Graphic design & branding",
+      "Social media management",
+    ],
+    icon: Video,
+    color: "text-google-blue",
+    bgColor: "bg-google-blue/10",
+  },
+  {
+    id: 9,
+    title: "Design",
+    description: "Create stunning visuals and brand identity",
+    requirements: [
+      "Typography & color theory",
+      "Brand identity design",
+      "Digital & print design",
+    ],
+    icon: Paintbrush,
+    color: "text-google-blue",
+    bgColor: "bg-google-blue/10",
+  },
 ];
 
 const benefits = [
   {
-    title: 'Google Swag & Certificates',
-    description: 'Exclusive merchandise and official certificates',
-    icon: Trophy
+    title: "Google Swag & Certificates",
+    description: "Exclusive merchandise and official certificates",
+    icon: Trophy,
   },
   {
-    title: 'Industry Networking',
-    description: 'Connect with Google engineers and industry experts',
-    icon: Users
+    title: "Industry Networking",
+    description: "Connect with Google engineers and industry experts",
+    icon: Users,
   },
   {
-    title: 'Skill Development',
-    description: 'Access to premium courses and training resources',
-    icon: Brain
+    title: "Skill Development",
+    description: "Access to premium courses and training resources",
+    icon: Brain,
   },
   {
-    title: 'Event Access',
-    description: 'Free access to Google events and conferences',
-    icon: Calendar
-  }
+    title: "Event Access",
+    description: "Free access to Google events and conferences",
+    icon: Calendar,
+  },
 ];
 
-export const CardsSection = () => {
+interface CardsSectionProps {
+  onOpenForm: (position?: string) => void;
+}
+
+export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
   return (
     <section id="cards-section" className="min-h-screen bg-background py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="google-heading-2 text-4xl md:text-5xl font-bold text-foreground mb-6">
             <span className="text-google-blue">Opportunities</span> Await
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Choose your track and start your journey with Google Developer Groups. 
-            Each position offers unique learning opportunities and real-world experience.
+          <p className="google-body-large text-xl text-muted-foreground max-w-3xl mx-auto">
+            Choose your track and start your journey with Google Developer
+            Groups. Each position offers unique learning opportunities and
+            real-world experience.
           </p>
         </div>
 
@@ -127,10 +189,10 @@ export const CardsSection = () => {
           {opportunities.map((opportunity) => {
             const IconComponent = opportunity.icon;
             return (
-              <Card 
-                key={opportunity.id} 
+              <Card
+                key={opportunity.id}
                 className={`relative group hover:shadow-xl transition-all duration-300 border-border hover:border-primary/50 ${
-                  opportunity.featured ? 'ring-2 ring-google-blue/30' : ''
+                  opportunity.featured ? "ring-2 ring-google-blue/30" : ""
                 }`}
               >
                 {opportunity.featured && (
@@ -141,48 +203,46 @@ export const CardsSection = () => {
                     </Badge>
                   </div>
                 )}
-                
+
                 <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg ${opportunity.bgColor} flex items-center justify-center mb-4`}>
+                  <div
+                    className={`w-12 h-12 rounded-lg ${opportunity.bgColor} flex items-center justify-center mb-4`}
+                  >
                     <IconComponent className={`w-6 h-6 ${opportunity.color}`} />
                   </div>
-                  <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  <CardTitle className="google-heading-4 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                     {opportunity.title}
                   </CardTitle>
-                  <CardDescription className="text-muted-foreground">
+                  <CardDescription className="google-body text-muted-foreground">
                     {opportunity.description}
                   </CardDescription>
                 </CardHeader>
-                
+
                 <CardContent>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-semibold text-sm text-foreground mb-2">Requirements:</h4>
+                      <h4 className="google-caption font-semibold text-sm text-foreground mb-2">
+                        Requirements:
+                      </h4>
                       <div className="flex flex-wrap gap-2">
                         {opportunity.requirements.map((req, index) => (
-                          <Badge key={index} variant="secondary" className="text-xs">
+                          <Badge
+                            key={index}
+                            variant="secondary"
+                            className="text-xs"
+                          >
                             {req}
                           </Badge>
                         ))}
                       </div>
                     </div>
-                    
-                    <div className="flex justify-between items-center text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        {opportunity.spots}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {opportunity.commitment}
-                      </div>
-                    </div>
-                    
-                    <Button 
+
+                    <Button
                       className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
                       variant="outline"
+                      onClick={() => onOpenForm(opportunity.title)}
                     >
-                      Learn More
+                      Apply Now
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </div>
@@ -202,7 +262,7 @@ export const CardsSection = () => {
               Being part of GDG comes with amazing perks and opportunities
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
@@ -227,10 +287,17 @@ export const CardsSection = () => {
         <div className="text-center mt-16">
           <div className="inline-flex items-center gap-4 p-6 bg-card border border-border rounded-2xl">
             <div>
-              <h4 className="text-xl font-bold text-foreground mb-2">Ready to Get Started?</h4>
-              <p className="text-muted-foreground">Applications are open now. Don't miss this opportunity!</p>
+              <h4 className="text-xl font-bold text-foreground mb-2">
+                Ready to Get Started?
+              </h4>
+              <p className="text-muted-foreground">
+                Applications are open now. Don't miss this opportunity!
+              </p>
             </div>
-            <Button className="bg-google-blue hover:bg-google-blue/90 text-white gdg-glow">
+            <Button
+              className="bg-google-blue hover:bg-google-blue/90 text-white gdg-glow"
+              onClick={() => onOpenForm()}
+            >
               Apply Today
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
