@@ -1,15 +1,24 @@
-import { useState } from 'react';
-import { Navbar } from '@/components/Navbar';
-import { HeroSection } from '@/components/HeroSection';
-import { CountdownTimer } from '@/components/CountdownTimer';
-import { CardsSection } from '@/components/CardsSection';
-import { UnicornLoader } from '@/components/UnicornLoader';
+import { useState } from "react";
+import { Navbar } from "@/components/Navbar";
+import { HeroSection } from "@/components/HeroSection";
+import { CountdownTimer } from "@/components/CountdownTimer";
+import { CardsSection } from "@/components/CardsSection";
+import { UnicornLoader } from "@/components/UnicornLoader";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [preSelectedPosition, setPreSelectedPosition] = useState<string>("");
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
+  };
+
+  const handleOpenFormWithPosition = (position?: string) => {
+    if (position) {
+      setPreSelectedPosition(position);
+    }
+    setIsFormOpen(true);
   };
 
   if (isLoading) {
@@ -18,13 +27,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-      <CountdownTimer />
+      <Navbar
+        isFormOpen={isFormOpen}
+        setIsFormOpen={setIsFormOpen}
+        preSelectedPosition={preSelectedPosition}
+        clearPreSelectedPosition={() => setPreSelectedPosition("")}
+      />
       <div id="home">
         <HeroSection />
+        {/* Countdown Timer positioned below hero */}
+        <div className="relative -mt-20 z-10 px-4 sm:px-6 lg:px-8">
+          <CountdownTimer />
+        </div>
       </div>
       <div id="opportunities">
-        <CardsSection />
+        <CardsSection onOpenForm={handleOpenFormWithPosition} />
       </div>
     </div>
   );
