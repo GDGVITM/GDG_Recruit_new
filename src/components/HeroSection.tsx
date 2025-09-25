@@ -54,8 +54,8 @@ const Scene = () => {
 };
 
 export const HeroSection = () => {
-  const titleWords = 'Build Your Dreams'.split(' ');
-  const subtitle = 'AI-powered creativity for the next generation.';
+  const titleWords = 'Innovate With GDG VITM'.split(' ');
+  const subtitle = 'Empowering developers, building the future together.';
   const [visibleWords, setVisibleWords] = useState(0);
   const [subtitleVisible, setSubtitleVisible] = useState(false);
   const [delays, setDelays] = useState<number[]>([]);
