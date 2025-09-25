@@ -7,8 +7,8 @@ export const AVAILABLE_POSITIONS = [
   "Media Team",
   "Event Management Team",
   "UI/UX Team",
-  "Events & Outreach",
-  "Design",
+  "Events & Outreach Team",
+  "Design Team",
 ] as const;
 
 export type Position = typeof AVAILABLE_POSITIONS[number];
