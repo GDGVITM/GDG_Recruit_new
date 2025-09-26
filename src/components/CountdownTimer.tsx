@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Clock } from "lucide-react";
+import { Clock, X } from "lucide-react";
 
 interface TimeLeft {
   days: number;
@@ -9,6 +9,9 @@ interface TimeLeft {
 }
 
 export const CountdownTimer = () => {
+  // State to control visibility of the countdown timer
+  const [isVisible, setIsVisible] = useState(true);
+
   // Set the target date (example: 30 days from now) - moved outside effect to prevent re-creation
   const [targetDate] = useState(() => {
     const date = new Date();
@@ -56,9 +59,28 @@ export const CountdownTimer = () => {
     { label: "Seconds", value: timeLeft.seconds, color: "text-google-green" },
   ];
 
+  // Handle close button click
+  const handleClose = () => {
+    setIsVisible(false);
+  };
+
+  // Don't render anything if the timer is closed
+  if (!isVisible) {
+    return null;
+  }
+
   return (
     <div className="fixed top-20 right-4 z-40 bg-card/90 backdrop-blur-lg border border-border rounded-lg p-4 shadow-lg">
-      <div className="flex items-center gap-2 mb-3">
+      {/* Close button */}
+      <button
+        onClick={handleClose}
+        className="absolute top-2 right-2 p-1 rounded-full hover:bg-muted/50 transition-colors group"
+        aria-label="Close countdown timer"
+      >
+        <X className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
+      </button>
+
+      <div className="flex items-center gap-2 mb-3 pr-6">
         <Clock className="w-5 h-5 text-google-red" />
         <span className="google-caption text-sm font-semibold text-foreground">
           Applications Close In:
