@@ -79,7 +79,17 @@ export const HeroSection = () => {
 
   return (
     <div className="h-screen relative overflow-hidden bg-background">
-      <div className="h-screen uppercase items-center w-full absolute z-50 pointer-events-none px-10 flex justify-center flex-col">
+      {/* Liquid Ether Background - Removed to prevent Three.js conflicts */}
+      {/* <LiquidEther
+        className="absolute inset-0 z-0"
+        colors={['#5227FF', '#FF9FFC', '#B19EEF', '#00D4FF']}
+        autoDemo={true}
+        autoSpeed={0.3}
+        resolution={0.8}
+        mouseForce={15}
+      /> */}
+
+      <div className="h-screen uppercase items-center w-full absolute z-50 pointer-events-none px-10 flex justify-center flex-col mt-72">
         <div className="google-heading-1 text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
           <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-foreground">
             {titleWords.map((word, index) => (
@@ -138,7 +148,7 @@ export const HeroSection = () => {
         </span>
       </button>
 
-      <Canvas className="absolute inset-0">
+      <Canvas className="absolute inset-0 -translate-y-16">
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <Scene />

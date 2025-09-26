@@ -283,26 +283,6 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-4 p-6 bg-card border border-border rounded-2xl">
-            <div>
-              <h4 className="text-xl font-bold text-foreground mb-2">
-                Ready to Get Started?
-              </h4>
-              <p className="text-muted-foreground">
-                Applications are open now. Don't miss this opportunity!
-              </p>
-            </div>
-            <Button
-              className="bg-google-blue hover:bg-google-blue/90 text-white gdg-glow"
-              onClick={() => onOpenForm()}
-            >
-              Apply Today
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
-        </div>
       </div>
     </section>
   );
