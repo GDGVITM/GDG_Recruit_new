@@ -25,7 +25,7 @@ import {
   UNIVERSITIES,
 } from "@/lib/constants";
 import { FormValidation } from "@/lib/formValidation";
-import { GoogleFormSubmission } from "@/lib/googleFormSubmission";
+import { BasinFormSubmission } from "@/lib/basinFormSubmission";
 
 interface ApplicationFormProps {
   isFormOpen: boolean;
@@ -65,6 +65,22 @@ export const ApplicationForm = ({
     }
   }, [isFormOpen, preSelectedPosition]);
 
+  // Hide/show scroll when form opens/closes
+  useEffect(() => {
+    if (isFormOpen) {
+      // Hide scroll
+      document.body.style.overflow = "hidden";
+    } else {
+      // Show scroll
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup function to reset scroll when component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isFormOpen]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -98,10 +114,21 @@ export const ApplicationForm = ({
     try {
       console.log("🔄 Starting form submission process...");
 
+      // Check if Basin is properly configured
+      if (!BasinFormSubmission.validateConfiguration()) {
+        toast({
+          title: "Configuration Error",
+          description:
+            "Form service is not properly configured. Please contact support.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       // Add a small delay to show loading state
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      await GoogleFormSubmission.submit(formData);
+      await BasinFormSubmission.submit(formData);
 
       console.log("✅ Form submission successful!");
 
@@ -264,7 +291,20 @@ export const ApplicationForm = ({
   return (
     <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
       <DialogTrigger asChild>{trigger || defaultTrigger}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent
+        className="max-w-2xl max-h-[80vh] overflow-y-auto"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        <style>
+          {`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}
+        </style>
         <DialogHeader>
           <DialogTitle className="google-heading-3 text-2xl font-bold text-google-blue">
             Join GDG Community
