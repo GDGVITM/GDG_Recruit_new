@@ -55,8 +55,8 @@ const Scene = () => {
 };
 
 export const HeroSection = () => {
-  const titleWords = 'Innovate With GDG VITM'.split(' ');
-  const subtitle = 'Empowering developers, building the future together.';
+  const titleWords = "Innovate With GDG VITM".split(" ");
+  const subtitle = "Empowering developers, building the future together.";
   const [visibleWords, setVisibleWords] = useState(0);
   const [subtitleVisible, setSubtitleVisible] = useState(false);
   const [delays, setDelays] = useState<number[]>([]);
@@ -120,33 +120,6 @@ export const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      <button className="explore-btn" style={{ animationDelay: "2.2s" }}>
-        Scroll to explore
-        <span className="explore-arrow">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 22 22"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="arrow-svg"
-          >
-            <path
-              d="M11 5V17"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M6 12L11 17L16 12"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </span>
-      </button>
 
       <Canvas className="absolute inset-0 -translate-y-16">
         <ambientLight intensity={0.5} />

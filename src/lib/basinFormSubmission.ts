@@ -1,10 +1,15 @@
 import type { FormData } from "./formValidation";
 
 export class BasinFormSubmission {
-  // Your Basin form endpoint
-  private static readonly BASIN_ENDPOINT = "https://usebasin.com/f/d36fd205b3bb";
+  // Your Basin form endpoint from environment variables
+  private static readonly BASIN_ENDPOINT = import.meta.env.VITE_BASIN_ENDPOINT;
 
   static async submit(formData: FormData): Promise<void> {
+    // Validate that the Basin endpoint is configured
+    if (!this.BASIN_ENDPOINT) {
+      throw new Error("Basin endpoint not configured. Please set VITE_BASIN_ENDPOINT in your environment file.");
+    }
+
     console.log("🔍 Debug: Form data being submitted to Basin:", {
       name: formData.name,
       email: formData.email,
@@ -87,8 +92,13 @@ export class BasinFormSubmission {
 
   // Validate Basin endpoint configuration
   static validateConfiguration(): boolean {
-    if (this.BASIN_ENDPOINT.includes("YOUR_FORM_ID")) {
-      console.error("❌ Basin endpoint not configured! Please update BASIN_ENDPOINT with your actual form ID.");
+    if (!this.BASIN_ENDPOINT) {
+      console.error("❌ Basin endpoint not configured! Please set VITE_BASIN_ENDPOINT in your environment file.");
+      return false;
+    }
+
+    if (this.BASIN_ENDPOINT.includes("YOUR_FORM_ID") || this.BASIN_ENDPOINT.includes("your_basin_endpoint_here")) {
+      console.error("❌ Basin endpoint not configured! Please update VITE_BASIN_ENDPOINT with your actual form ID.");
       return false;
     }
     
