@@ -12,10 +12,12 @@ export const CountdownTimer = () => {
   // State to control visibility of the countdown timer
   const [isVisible, setIsVisible] = useState(true);
 
-  // Set the target date (example: 30 days from now) - moved outside effect to prevent re-creation
+  // Set the target date to exactly 5 days from now
   const [targetDate] = useState(() => {
     const date = new Date();
-    date.setDate(date.getDate() + 30);
+    // Set time to end of day (23:59:59) 5 days from now
+    date.setDate(date.getDate() + 5);
+    date.setHours(23, 59, 59, 999);
     return date;
   });
 
@@ -39,15 +41,18 @@ export const CountdownTimer = () => {
         };
       }
 
+      // When countdown reaches zero, keep it at zero but don't clear the interval
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     };
 
     // Set initial value
-    setTimeLeft(calculateTimeLeft());
+    const updateTimer = () => setTimeLeft(calculateTimeLeft());
+    updateTimer();
 
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    // Update every second
+    const timer = setInterval(updateTimer, 1000);
+
+    // Cleanup on unmount
 
     return () => clearInterval(timer);
   }, []); // Remove targetDate dependency since it's now stable
