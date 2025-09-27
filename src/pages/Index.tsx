@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { CardsSection } from "@/components/CardsSection";
 import { UnicornLoader } from "@/components/UnicornLoader";
+import SmoothCursor from "@/components/SmoothCursor";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,8 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background cursor-none">
+      <SmoothCursor />
       <Navbar
         isFormOpen={isFormOpen}
         setIsFormOpen={setIsFormOpen}
