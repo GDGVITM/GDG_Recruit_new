@@ -26,9 +26,9 @@ A modern, interactive recruitment portal built with cutting-edge web technologie
 
 ### Prerequisites
 
-- Node.js 16+ (Recommended: Latest LTS version)
-- npm or yarn
-- Git
+- node.js 16+ (Recommended: Latest LTS version)
+- npm
+- git
 
 ### Installation
 
@@ -41,15 +41,11 @@ A modern, interactive recruitment portal built with cutting-edge web technologie
 2. **Install dependencies**
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
 3. **Start the development server**
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
 4. **Open your browser**
@@ -59,8 +55,6 @@ A modern, interactive recruitment portal built with cutting-edge web technologie
 
 ```bash
 npm run build
-# or
-yarn build
 ```
 
 This will create a `dist` folder with the production build.
@@ -71,8 +65,6 @@ To run tests:
 
 ```bash
 npm test
-# or
-yarn test
 ```
 
 ## 🤝 Contributing
@@ -94,4 +86,4 @@ yarn test
 
 ## 📧 Contact
 
-For any queries, please contact [Your Email] or open an issue in the repository.
+For any queries, please contact ` gdgoncampus.vit@gmail.com ` or open an issue in the repository.
