@@ -3,7 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { CardsSection } from "@/components/CardsSection";
-import { UnicornLoader } from "@/components/UnicornLoader";
+import { Loader } from "@/components/Loader";
 import SmoothCursor from "@/components/SmoothCursor";
 
 const Index = () => {
@@ -23,7 +23,7 @@ const Index = () => {
   };
 
   if (isLoading) {
-    return <UnicornLoader onComplete={handleLoadingComplete} />;
+    return <Loader onComplete={handleLoadingComplete} />;
   }
 
   return (
