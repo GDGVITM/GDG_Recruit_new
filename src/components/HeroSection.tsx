@@ -89,7 +89,7 @@ export const HeroSection = () => {
         mouseForce={15}
       /> */}
 
-      <div className="h-screen uppercase items-center w-full absolute z-50 pointer-events-none px-10 flex justify-center flex-col mt-72">
+      <div className="h-screen uppercase items-center w-full absolute z-10 pointer-events-none px-10 flex justify-center flex-col mt-72">
         <div className="google-heading-1 text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
           <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-foreground">
             {titleWords.map((word, index) => (

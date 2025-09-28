@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ApplicationForm } from "./ApplicationForm";
+import { handleSmoothScroll } from "@/lib/smoothScroll";
 
 interface MobileNavigationProps {
   isOpen: boolean;
@@ -25,24 +26,19 @@ export const MobileNavigation = ({
       <div className="px-2 pt-2 pb-3 space-y-1">
         <a
           href="#home"
-          className="block px-3 py-2 text-foreground hover:text-google-blue transition-colors"
-          onClick={() => setIsOpen(false)}
+          className="block px-3 py-2 text-foreground hover:text-google-blue transition-colors cursor-pointer"
+          onClick={(e) => handleSmoothScroll(e, "home", () => setIsOpen(false))}
         >
           Home
         </a>
         <a
           href="#opportunities"
-          className="block px-3 py-2 text-foreground hover:text-google-blue transition-colors"
-          onClick={() => setIsOpen(false)}
+          className="block px-3 py-2 text-foreground hover:text-google-blue transition-colors cursor-pointer"
+          onClick={(e) =>
+            handleSmoothScroll(e, "opportunities", () => setIsOpen(false))
+          }
         >
           Opportunities
-        </a>
-        <a
-          href="#about"
-          className="block px-3 py-2 text-foreground hover:text-google-blue transition-colors"
-          onClick={() => setIsOpen(false)}
-        >
-          About GDG
         </a>
         <div className="px-3 py-2">
           <ApplicationForm

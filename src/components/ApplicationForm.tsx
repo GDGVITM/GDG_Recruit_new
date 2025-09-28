@@ -25,7 +25,7 @@ import {
   UNIVERSITIES,
 } from "@/lib/constants";
 import { FormValidation } from "@/lib/formValidation";
-import { BasinFormSubmission } from "@/lib/basinFormSubmission";
+import { SupabaseFormSubmission } from "@/lib/supabaseFormSubmission";
 
 interface ApplicationFormProps {
   isFormOpen: boolean;
@@ -114,8 +114,8 @@ export const ApplicationForm = ({
     try {
       console.log("🔄 Starting form submission process...");
 
-      // Check if Basin is properly configured
-      if (!BasinFormSubmission.validateConfiguration()) {
+      // Check if Supabase is properly configured
+      if (!SupabaseFormSubmission.validateConfiguration()) {
         toast({
           title: "Configuration Error",
           description:
@@ -125,10 +125,25 @@ export const ApplicationForm = ({
         return;
       }
 
+      // Check if email already exists (optional - can be removed if you want to allow duplicate emails)
+      const emailExists = await SupabaseFormSubmission.emailExists(
+        formData.email
+      );
+      if (emailExists) {
+        toast({
+          title: "Email Already Registered",
+          description:
+            "An application with this email already exists. Please use a different email address.",
+          variant: "destructive",
+        });
+        setFormErrors({ email: "This email is already registered" });
+        return;
+      }
+
       // Add a small delay to show loading state
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      await BasinFormSubmission.submit(formData);
+      await SupabaseFormSubmission.submit(formData);
 
       console.log("✅ Form submission successful!");
 

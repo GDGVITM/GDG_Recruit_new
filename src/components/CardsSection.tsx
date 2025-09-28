@@ -191,7 +191,7 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
             return (
               <Card
                 key={opportunity.id}
-                className={`relative group hover:shadow-xl transition-all duration-300 border-border hover:border-primary/50 ${
+                className={`relative group hover:shadow-xl transition-all duration-300 border-border hover:border-primary/50 h-full flex flex-col ${
                   opportunity.featured ? "ring-2 ring-google-blue/30" : ""
                 }`}
               >
@@ -204,7 +204,7 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
                   </div>
                 )}
 
-                <CardHeader>
+                <CardHeader className="flex-shrink-0">
                   <div
                     className={`w-12 h-12 rounded-lg ${opportunity.bgColor} flex items-center justify-center mb-4`}
                   >
@@ -218,8 +218,8 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent>
-                  <div className="space-y-4">
+                <CardContent className="flex flex-col flex-grow">
+                  <div className="flex-grow">
                     <div>
                       <h4 className="google-caption font-semibold text-sm text-foreground mb-2">
                         Requirements:
@@ -236,7 +236,9 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
                         ))}
                       </div>
                     </div>
+                  </div>
 
+                  <div className="mt-6 pt-4">
                     <Button
                       className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
                       variant="outline"
@@ -282,7 +284,6 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
             })}
           </div>
         </div>
-
       </div>
     </section>
   );

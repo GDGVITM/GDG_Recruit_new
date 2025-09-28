@@ -6,14 +6,17 @@ A modern, interactive recruitment portal built with cutting-edge web technologie
 
 - **Interactive 3D Elements**: Built with Three.js and React Three Fiber
 - **Modern UI**: Built with shadcn/ui and Tailwind CSS
+- **Supabase Backend**: Secure, scalable database with real-time capabilities
 - **Type Safety**: Full TypeScript support
 - **Fast Development**: Powered by Vite
 - **Form Handling**: Robust form management with React Hook Form
 - **State Management**: Efficient state management with React Query
+- **Admin Dashboard**: Built-in application management interface
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: React 18
+- **Backend**: Supabase (PostgreSQL database)
 - **Styling**: Tailwind CSS with shadcn/ui components
 - **3D Rendering**: Three.js, @react-three/fiber, @react-three/drei
 - **Form Handling**: React Hook Form with Zod validation
@@ -26,9 +29,10 @@ A modern, interactive recruitment portal built with cutting-edge web technologie
 
 ### Prerequisites
 
-- node.js 16+ (Recommended: Latest LTS version)
+- Node.js 16+ (Recommended: Latest LTS version)
 - npm
 - git
+- Supabase account (free tier available)
 
 ### Installation
 
@@ -43,15 +47,55 @@ A modern, interactive recruitment portal built with cutting-edge web technologie
    npm install
    ```
 
-3. **Start the development server**
+3. **Set up Supabase**
+   - Create a new project at [Supabase](https://supabase.com)
+   - Run the SQL schema from `supabase-schema.sql` in your SQL editor
+   - Copy your project URL and anon key
+
+4. **Configure environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   Update `.env` with your Supabase credentials:
+   ```bash
+   VITE_SUPABASE_URL=https://your-project-id.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+   ```
+
+5. **Start the development server**
    ```bash
    npm run dev
    ```
 
-4. **Open your browser**
+6. **Open your browser**
    The application will be available at [http://localhost:5173](http://localhost:5173)
 
-## 📦 Build for Production
+## � Documentation
+
+- **[Supabase Setup Guide](SUPABASE_SETUP.md)** - Detailed setup instructions
+- **[Migration Summary](SUPABASE_MIGRATION_SUMMARY.md)** - What changed in the migration
+
+## 🧪 Testing
+
+### Form Testing
+Open browser console and use the built-in debug utilities:
+```javascript
+// Test form submission
+testSupabaseSubmission()
+
+// View all applications
+getAllApplications()
+
+// Check if email exists
+checkEmailExists("test@example.com")
+```
+
+### Unit Tests
+```bash
+npm test
+```
+
+## �📦 Build for Production
 
 ```bash
 npm run build
@@ -59,13 +103,31 @@ npm run build
 
 This will create a `dist` folder with the production build.
 
-## 🧪 Testing
+## 🛡️ Database Schema
 
-To run tests:
+The application uses a PostgreSQL database with the following main table:
 
-```bash
-npm test
-```
+### Applications Table
+- `id` - Unique UUID
+- `name` - Applicant's full name
+- `email` - Applicant's email (unique)
+- `university` - University/Institution
+- `year` - Academic year
+- `position` - Applied position
+- `skills` - Technical skills
+- `experience` - Previous experience
+- `motivation` - Motivation to join GDG
+- `created_at` - Submission timestamp
+- `updated_at` - Last update timestamp
+
+## 🔧 Admin Features
+
+The portal includes an optional admin dashboard (`ApplicationsAdmin` component) with:
+- View all applications
+- Search and filter capabilities
+- Export to CSV
+- Real-time statistics
+- Responsive design
 
 ## 🤝 Contributing
 
@@ -75,15 +137,15 @@ npm test
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-
 ## 🙏 Acknowledgments
 
 - [Vite](https://vitejs.dev/)
 - [React](https://reactjs.org/)
+- [Supabase](https://supabase.com/)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Three.js](https://threejs.org/)
 
 ## 📧 Contact
 
-For any queries, please contact ` gdgoncampus.vit@gmail.com ` or open an issue in the repository.
+For any queries, please contact `gdgoncampus.vit@gmail.com` or open an issue in the repository.

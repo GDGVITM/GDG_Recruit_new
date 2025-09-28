@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { CardsSection } from "@/components/CardsSection";
 import { Loader } from "@/components/Loader";
+import { Footer } from "@/components/Footer";
 import SmoothCursor from "@/components/SmoothCursor";
 
 const Index = () => {
@@ -45,6 +46,7 @@ const Index = () => {
       <div id="opportunities">
         <CardsSection onOpenForm={handleOpenFormWithPosition} />
       </div>
+      <Footer />
     </div>
   );
 };
