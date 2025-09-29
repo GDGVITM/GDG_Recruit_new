@@ -38,7 +38,7 @@ const opportunities = [
     icon: GitBranch,
     color: "text-google-yellow",
     bgColor: "bg-google-yellow/10",
-    featured: true,
+    isNew: true,
   },
   {
     id: 6,
@@ -48,7 +48,6 @@ const opportunities = [
     icon: Calendar,
     color: "text-google-red",
     bgColor: "bg-google-red/10",
-    featured: true,
   },
   {
     id: 7,
@@ -62,7 +61,7 @@ const opportunities = [
     icon: Palette,
     color: "text-google-green",
     bgColor: "bg-google-green/10",
-    featured: true,
+    isNew: true,
   },
   {
     id: 8,
@@ -112,6 +111,7 @@ const opportunities = [
     icon: BookOpen,
     color: "text-google-green",
     bgColor: "bg-google-green/10",
+    isNew: true,
   },
   {
     id: 5,
@@ -192,14 +192,14 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
               <Card
                 key={opportunity.id}
                 className={`relative group hover:shadow-xl transition-all duration-300 border-border hover:border-primary/50 h-full flex flex-col ${
-                  opportunity.featured ? "ring-2 ring-google-blue/30" : ""
+                  opportunity.isNew ? "ring-2 ring-google-green/30" : ""
                 }`}
               >
-                {opportunity.featured && (
+                {opportunity.isNew && (
                   <div className="absolute -top-2 -right-2">
-                    <Badge className="bg-google-blue text-white">
+                    <Badge className="bg-google-green text-white">
                       <Star className="w-3 h-3 mr-1" />
-                      Featured
+                      New
                     </Badge>
                   </div>
                 )}
@@ -243,6 +243,7 @@ export const CardsSection = ({ onOpenForm }: CardsSectionProps) => {
                       className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
                       variant="outline"
                       onClick={() => onOpenForm(opportunity.title)}
+                      data-cursor-stable="true"
                     >
                       Apply Now
                       <ArrowRight className="w-4 h-4 ml-2" />

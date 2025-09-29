@@ -27,7 +27,7 @@
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 4 90% 58%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 220 15% 18%;
@@ -42,17 +42,17 @@
 
     /* Futuristic Effects */
     --glow-blue: 217 91% 60%;
-    --glow-red: 4 90% 58%;
-    --scan-line: 4 90% 58%;
+    --glow-blue-secondary: 200 100% 50%;
+    --scan-line: 217 91% 60%;
     
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(217 91% 60% / 0.3), hsl(4 90% 58% / 0.3));
     --gradient-card: linear-gradient(145deg, hsl(220 15% 12%), hsl(220 15% 18%));
-    --gradient-scan: linear-gradient(90deg, transparent, hsl(4 90% 58% / 0.8), transparent);
+    --gradient-scan: linear-gradient(90deg, transparent, hsl(217 91% 60% / 0.6), transparent);
     
     /* Shadows */
     --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
-    --shadow-scan: 0 0 20px hsl(4 90% 58% / 0.5);
+    --shadow-scan: 0 0 20px hsl(217 91% 60% / 0.5);
     --shadow-card: 0 8px 32px hsl(220 15% 5% / 0.8);
 
     /* Animations */
@@ -106,7 +106,7 @@
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 4 90% 58%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
@@ -240,8 +240,8 @@
   }
 
   .timer-digit:hover {
-    border-color: hsl(var(--google-red));
-    box-shadow: var(--shadow-card), 0 0 15px hsl(var(--google-red) / 0.3);
+    border-color: hsl(var(--google-blue));
+    box-shadow: var(--shadow-card), 0 0 15px hsl(var(--google-blue) / 0.3);
   }
 }
 

@@ -28,7 +28,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background cursor-none">
+    <div className="min-h-screen bg-background">
       <SmoothCursor />
       <Navbar
         isFormOpen={isFormOpen}

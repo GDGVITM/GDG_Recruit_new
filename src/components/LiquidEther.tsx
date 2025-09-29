@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 export interface LiquidEtherProps {
@@ -55,36 +55,61 @@ interface LiquidEtherWebGL {
 const defaultColors = ['#5227FF', '#FF9FFC', '#B19EEF'];
 
 export default function LiquidEther({
-  mouseForce = 20,
-  cursorSize = 100,
+  mouseForce = 15,  // Reduced for better performance
+  cursorSize = 80,  // Reduced for better performance
   isViscous = false,
-  viscous = 30,
-  iterationsViscous = 32,
-  iterationsPoisson = 32,
-  dt = 0.014,
-  BFECC = true,
-  resolution = 0.5,
+  viscous = 20,     // Reduced for better performance
+  iterationsViscous = 16,  // Reduced for better performance
+  iterationsPoisson = 16,  // Reduced for better performance
+  dt = 0.016,       // Slightly increased for smoother performance
+  BFECC = false,    // Disabled for better performance
+  resolution = 0.3, // Reduced for better performance
   isBounce = false,
   colors = defaultColors,
   style = {},
   className = '',
   autoDemo = true,
-  autoSpeed = 0.5,
-  autoIntensity = 2.2,
+  autoSpeed = 0.3,  // Reduced for better performance
+  autoIntensity = 1.5, // Reduced for better performance
   takeoverDuration = 0.25,
-  autoResumeDelay = 1000,
-  autoRampDuration = 0.6
+  autoResumeDelay = 2000,  // Increased for better performance
+  autoRampDuration = 0.8
 }: LiquidEtherProps): React.ReactElement {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const webglRef = useRef<LiquidEtherWebGL | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const rafRef = useRef<number | null>(null);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
-  const isVisibleRef = useRef<boolean>(true);
+  const isVisibleRef = useRef<boolean>(false);  // Start as false for better performance
   const resizeRafRef = useRef<number | null>(null);
+  const [isSupported, setIsSupported] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!mountRef.current) return;
+
+    // Check for WebGL support and device capabilities
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    
+    if (!gl) {
+      setIsSupported(false);
+      setIsLoading(false);
+      return;
+    }
+
+    // Check for mobile devices and reduce quality
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // Further reduce settings for mobile
+      resolution = Math.min(resolution, 0.2);
+      iterationsViscous = Math.min(iterationsViscous, 8);
+      iterationsPoisson = Math.min(iterationsPoisson, 8);
+      mouseForce = Math.min(mouseForce, 10);
+    }
+
+    try {
 
     function makePaletteTexture(stops: string[]): THREE.DataTexture {
       let arr: string[];
@@ -1112,7 +1137,7 @@ export default function LiquidEther({
           webglRef.current.pause();
         }
       },
-      { threshold: [0, 0.01, 0.1] }
+      { threshold: [0, 0.1], rootMargin: '50px' }  // Optimized thresholds
     );
     io.observe(container);
     intersectionObserverRef.current = io;
@@ -1127,6 +1152,8 @@ export default function LiquidEther({
     });
     ro.observe(container);
     resizeObserverRef.current = ro;
+
+    setIsLoading(false);
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -1149,6 +1176,11 @@ export default function LiquidEther({
       }
       webglRef.current = null;
     };
+    } catch (error) {
+      console.warn('LiquidEther failed to initialize:', error);
+      setIsSupported(false);
+      setIsLoading(false);
+    }
   }, [
     BFECC,
     cursorSize,
@@ -1216,6 +1248,29 @@ export default function LiquidEther({
     autoResumeDelay,
     autoRampDuration
   ]);
+
+  // Fallback for unsupported devices
+  if (!isSupported) {
+    return (
+      <div
+        className={`w-full h-full relative overflow-hidden pointer-events-none touch-none ${className || ''} bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10`}
+        style={style}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/5 to-accent/10 animate-pulse" />
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div
+        className={`w-full h-full relative overflow-hidden pointer-events-none touch-none ${className || ''} bg-gradient-to-br from-primary/5 to-accent/5`}
+        style={style}
+      >
+        <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div

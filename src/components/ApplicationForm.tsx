@@ -92,9 +92,8 @@ export const ApplicationForm = ({
     if (!validation.isValid) {
       setFormErrors(validation.errors);
       toast({
-        title: "Please Fix Form Errors",
+        title: "⚠️ Please Fix Form Errors",
         description: "Please correct the highlighted fields before submitting.",
-        variant: "destructive",
       });
       return;
     }
@@ -311,6 +310,7 @@ export const ApplicationForm = ({
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
+          zIndex: 51, // Ensure it's below cursor z-index
         }}
       >
         <style>
@@ -338,12 +338,12 @@ export const ApplicationForm = ({
                 required
                 className={`scan-effect ${
                   formErrors.name
-                    ? "border-destructive focus-visible:ring-destructive"
+                    ? "border-google-blue focus-visible:ring-google-blue"
                     : ""
                 }`}
               />
               {formErrors.name && (
-                <p className="text-sm text-destructive">{formErrors.name}</p>
+                <p className="text-sm text-google-blue">{formErrors.name}</p>
               )}
             </div>
             <div className="space-y-2">
@@ -356,12 +356,12 @@ export const ApplicationForm = ({
                 required
                 className={`scan-effect ${
                   formErrors.email
-                    ? "border-destructive focus-visible:ring-destructive"
+                    ? "border-google-blue focus-visible:ring-google-blue"
                     : ""
                 }`}
               />
               {formErrors.email && (
-                <p className="text-sm text-destructive">{formErrors.email}</p>
+                <p className="text-sm text-google-blue">{formErrors.email}</p>
               )}
             </div>
           </div>
@@ -379,7 +379,7 @@ export const ApplicationForm = ({
                 <SelectTrigger
                   className={`scan-effect ${
                     formErrors.university
-                      ? "border-destructive focus:ring-destructive"
+                      ? "border-google-blue focus:ring-google-blue"
                       : ""
                   }`}
                 >
@@ -394,7 +394,7 @@ export const ApplicationForm = ({
                 </SelectContent>
               </Select>
               {formErrors.university && (
-                <p className="text-sm text-destructive">
+                <p className="text-sm text-google-blue">
                   {formErrors.university}
                 </p>
               )}
@@ -408,7 +408,7 @@ export const ApplicationForm = ({
                 <SelectTrigger
                   className={`scan-effect ${
                     formErrors.year
-                      ? "border-destructive focus:ring-destructive"
+                      ? "border-google-blue focus:ring-google-blue"
                       : ""
                   }`}
                 >
@@ -423,7 +423,7 @@ export const ApplicationForm = ({
                 </SelectContent>
               </Select>
               {formErrors.year && (
-                <p className="text-sm text-destructive">{formErrors.year}</p>
+                <p className="text-sm text-google-blue">{formErrors.year}</p>
               )}
             </div>
           </div>
@@ -439,7 +439,7 @@ export const ApplicationForm = ({
               <SelectTrigger
                 className={`scan-effect ${
                   formErrors.position
-                    ? "border-destructive focus:ring-destructive"
+                    ? "border-google-blue focus:ring-google-blue"
                     : ""
                 }`}
               >
@@ -454,7 +454,7 @@ export const ApplicationForm = ({
               </SelectContent>
             </Select>
             {formErrors.position && (
-              <p className="text-sm text-destructive">{formErrors.position}</p>
+              <p className="text-sm text-google-blue">{formErrors.position}</p>
             )}
           </div>
 
@@ -469,12 +469,12 @@ export const ApplicationForm = ({
               placeholder="e.g., Web Development, Mobile Apps, AI/ML, Cloud Computing, etc."
               className={`scan-effect min-h-[80px] ${
                 formErrors.skills
-                  ? "border-destructive focus-visible:ring-destructive"
+                  ? "border-google-blue focus-visible:ring-google-blue"
                   : ""
               }`}
             />
             {formErrors.skills && (
-              <p className="text-sm text-destructive">{formErrors.skills}</p>
+              <p className="text-sm text-google-blue">{formErrors.skills}</p>
             )}
           </div>
 
@@ -489,12 +489,12 @@ export const ApplicationForm = ({
               placeholder="Tell us about your projects, internships, or relevant experience"
               className={`scan-effect min-h-[80px] ${
                 formErrors.experience
-                  ? "border-destructive focus-visible:ring-destructive"
+                  ? "border-google-blue focus-visible:ring-google-blue"
                   : ""
               }`}
             />
             {formErrors.experience && (
-              <p className="text-sm text-destructive">
+              <p className="text-sm text-google-blue">
                 {formErrors.experience}
               </p>
             )}
@@ -512,12 +512,12 @@ export const ApplicationForm = ({
               required
               className={`scan-effect min-h-[100px] ${
                 formErrors.motivation
-                  ? "border-destructive focus-visible:ring-destructive"
+                  ? "border-google-blue focus-visible:ring-google-blue"
                   : ""
               }`}
             />
             {formErrors.motivation && (
-              <p className="text-sm text-destructive">
+              <p className="text-sm text-google-blue">
                 {formErrors.motivation}
               </p>
             )}
