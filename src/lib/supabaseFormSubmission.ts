@@ -3,6 +3,21 @@ import type { FormData } from './formValidation'
 
 export class SupabaseFormSubmission {
   /**
+   * Validate that Supabase is properly configured
+   * @returns boolean
+   */
+  static validateConfiguration(): boolean {
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+      return !!(supabaseUrl && supabaseKey)
+    } catch (error) {
+      console.error('❌ Error validating Supabase configuration:', error)
+      return false
+    }
+  }
+
+  /**
    * Submit form data to Supabase database
    * @param formData The form data to submit
    * @returns Promise<void>

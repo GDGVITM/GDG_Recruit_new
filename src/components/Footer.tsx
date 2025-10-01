@@ -33,7 +33,7 @@ const Footer = () => {
           {/* GDG Motto */}
           <div className="text-center">
             <p className="text-lg font-medium text-foreground mb-2">
-              "Connect, Learn, and Grow together"
+              "For all updates Join https://chat.whatsapp.com/InvBNiW7DEl6YqcQHbgCn6"
             </p>
             <p className="text-sm text-muted-foreground max-w-md">
               Building a community of developers, designers, and innovators

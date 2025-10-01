@@ -148,8 +148,20 @@ export const ApplicationForm = ({
 
       toast({
         title: "Application Submitted Successfully! 🎉",
-        description:
-          "Thank you for applying to GDG! We'll review your application and get back to you soon.",
+        description: (
+          <div className="space-y-2">
+            <p>Thank you for applying to GDG! We'll review your application and get back to you soon.</p>
+            <p className="font-semibold">Join our WhatsApp group for updates:</p>
+            <a
+              href="https://chat.whatsapp.com/InvBNiW7DEl6YqcQHbgCn6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-google-blue hover:underline break-all"
+            >
+              https://chat.whatsapp.com/InvBNiW7DEl6YqcQHbgCn6
+            </a>
+          </div>
+        ),
       });
 
       setIsFormOpen(false);
