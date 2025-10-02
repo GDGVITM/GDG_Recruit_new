@@ -280,21 +280,21 @@ export const ApplicationForm = ({
         return {
           ...baseLabels,
           skills: "UI/UX Design Skills & Tools",
-          experience: "Design Experience & Portfolio",
+          experience: "Design Experience & Portfolio links",
           motivation: "What inspires you to be part of the UI/UX Team?",
         };
-      case "Events & Outreach Team":
+      case "Outreach Team":
         return {
           ...baseLabels,
           skills: "Community Outreach & Partnership Skills",
           experience: "Outreach & Community Building Experience",
-          motivation: "What inspires you to be part of Events & Outreach?",
+          motivation: "What inspires you to be part of Outreach?",
         };
       case "Design Team":
         return {
           ...baseLabels,
           skills: "Visual Design & Creative Skills",
-          experience: "Design Portfolio & Creative Projects",
+          experience: "Design Portfolio & Creative Projects and links",
           motivation: "What inspires you to be part of the Design Team?",
         };
       default:

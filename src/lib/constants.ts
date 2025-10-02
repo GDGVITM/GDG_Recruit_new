@@ -7,7 +7,7 @@ export const AVAILABLE_POSITIONS = [
   "Media Team",
   "Event Management Team",
   "UI/UX Team",
-  "Events & Outreach Team",
+  "Outreach Team",
   "Design Team",
 ] as const;
 

@@ -65,7 +65,7 @@ const opportunities = [
   },
   {
     id: 8,
-    title: "Events & Outreach",
+    title: "Outreach Team",
     description: "Build community connections and expand our reach",
     requirements: [
       "Community engagement",
@@ -128,7 +128,7 @@ const opportunities = [
   },
   {
     id: 9,
-    title: "Design",
+    title: "Design Team",
     description: "Create stunning visuals and brand identity",
     requirements: [
       "Typography & color theory",
